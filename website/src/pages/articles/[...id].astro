@@ -1,0 +1,73 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getPublishedPosts, formatDate, getHeroUrl } from '../../lib/posts';
+import type { BlogPost } from '../../lib/posts';
+
+export async function getStaticPaths() {
+	const posts = await getPublishedPosts();
+	return posts.map((post) => ({
+		params: { id: post.id },
+		props: { post },
+	}));
+}
+
+interface Props {
+	post: BlogPost;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const typeLabel = post.data.type === 'news' ? 'News' : 'Guide';
+const heroUrl = getHeroUrl(post);
+---
+
+<BaseLayout
+	title={post.data.title}
+	seoTitle={post.data.seoTitle}
+	description={post.data.description}
+	ogImage={heroUrl}
+>
+	<article>
+		<header class="article-header">
+			<div class="measure">
+				<nav class="breadcrumb" aria-label="Breadcrumb">
+					<ol>
+						<li><a href="/">Home</a></li>
+						<li><a href="/articles/">Articles</a></li>
+						<li aria-current="page">{post.data.title}</li>
+					</ol>
+				</nav>
+				<p class="kicker">{typeLabel}</p>
+				<h1 class="page-title">{post.data.title}</h1>
+				<p class="article-meta">
+					{post.data.author && <>{post.data.author} · </>}
+					<time datetime={post.data.pubDate.toISOString()}>
+						{formatDate(post.data.pubDate)}
+					</time>
+					{post.data.updatedDate &&
+						post.data.updatedDate.valueOf() !== post.data.pubDate.valueOf() && (
+							<>
+								{' '}
+								· Updated {formatDate(post.data.updatedDate)}
+							</>
+						)}
+				</p>
+				{heroUrl && (
+					<figure class="hero">
+						<img
+							src={heroUrl}
+							alt={post.data.heroImageAlt ?? post.data.title}
+							width="2000"
+							height="1000"
+						/>
+					</figure>
+				)}
+			</div>
+		</header>
+
+		<div class="measure prose">
+			<Content />
+		</div>
+	</article>
+</BaseLayout>

@@ -1,0 +1,33 @@
+---
+import { formatDate, getThumbnailUrl, postHref, type BlogPost } from '../lib/posts';
+
+interface Props {
+	post: BlogPost;
+}
+
+const { post } = Astro.props;
+const thumbUrl = getThumbnailUrl(post);
+---
+
+<a class:list={['post-card', thumbUrl && 'post-card--has-thumb']} href={postHref(post)}>
+	<div class="post-card__body">
+		<p class="post-card__meta">
+			<time datetime={post.data.pubDate.toISOString()}>
+				{formatDate(post.data.pubDate)}
+			</time>
+			{post.data.type === 'news' ? ' · News' : ' · Guide'}
+		</p>
+		<h2 class="post-card__title">{post.data.title}</h2>
+		<p class="post-card__excerpt">{post.data.description}</p>
+	</div>
+	{thumbUrl && (
+		<div class="post-card__thumb">
+			<img
+				src={thumbUrl}
+				alt={post.data.thumbnailAlt ?? ''}
+				width="150"
+				height="100"
+			/>
+		</div>
+	)}
+</a>

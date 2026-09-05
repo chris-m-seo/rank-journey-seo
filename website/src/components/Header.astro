@@ -1,0 +1,26 @@
+---
+const path = Astro.url.pathname;
+const isHome = path === '/';
+const isArticles = path === '/articles' || path.startsWith('/articles/');
+const isAbout = path === '/about' || path.startsWith('/about/');
+---
+
+<header class="site-header">
+	<div class="wrap site-header__inner">
+		<a class="brand" href="/">
+			<img
+				class="brand__logo"
+				src="/logo.jpg"
+				alt=""
+				width="40"
+				height="40"
+			/>
+			<span class="brand__name">Rank Journey SEO</span>
+		</a>
+		<nav class="nav" aria-label="Primary">
+			<a href="/" aria-current={isHome ? 'page' : undefined}>Home</a>
+			<a href="/articles/" aria-current={isArticles ? 'page' : undefined}>Articles</a>
+			<a href="/about/" aria-current={isAbout ? 'page' : undefined}>About</a>
+		</nav>
+	</div>
+</header>

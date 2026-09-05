@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.rankjourneyseo.com/sitemap-index.xml

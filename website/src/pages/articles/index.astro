@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPublishedPosts } from '../../lib/posts';
+
+const posts = await getPublishedPosts();
+---
+
+<BaseLayout
+	title="Articles"
+	description="SEO articles from Rank Journey SEO — news and practical guides on search, so you can improve your site with confidence."
+>
+	<section class="page wrap">
+		<p class="kicker">SEO articles</p>
+		<h1 class="page-title">Articles</h1>
+		<p class="lede">
+			Long-form guides and timely notes on SEO, search, and the modern web.
+		</p>
+
+		{posts.length === 0 ? (
+			<p class="empty-state">Articles will appear here.</p>
+		) : (
+			<ul class="post-list">
+				{posts.map((post) => (
+					<li>
+						<PostCard post={post} />
+					</li>
+				))}
+			</ul>
+		)}
+	</section>
+</BaseLayout>

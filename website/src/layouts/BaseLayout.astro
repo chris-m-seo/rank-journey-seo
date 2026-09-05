@@ -1,0 +1,49 @@
+---
+import '@fontsource-variable/source-sans-3/wght.css';
+import '@fontsource-variable/source-serif-4/wght.css';
+import '@fontsource-variable/source-serif-4/wght-italic.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description: string;
+	seoTitle?: string;
+	ogImage?: string;
+}
+
+const { title, description, seoTitle, ogImage } = Astro.props;
+const heading = seoTitle ?? title;
+const pageTitle = heading === 'Rank Journey SEO' ? heading : `${heading} | Rank Journey SEO`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const shareImage = new URL(ogImage ?? '/logo.jpg', Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{pageTitle}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/logo.jpg" />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={shareImage} />
+		<meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+	</head>
+	<body>
+		<a class="skip-link" href="#main">Skip to content</a>
+		<Header />
+		<main id="main">
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>
