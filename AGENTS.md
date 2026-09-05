@@ -1,12 +1,12 @@
 # AGENTS.md
 
-Project rules for Rank Journey SEO. This is a Grok Build project — the owner and Grok only. Do not use Claude Code, Claude naming, or Claude conventions. If you find the name Claude in this repo, replace it with Grok.
+Project rules for Rank Journey SEO.
 
 ## Project overview
 
-Rank Journey SEO is an SEO news and education website built with Astro and hosted on GitHub Pages at `https://www.rankjourneyseo.com` (custom domain from GoDaddy). The site publishes long-form educational articles alongside timely news coverage of SEO, AI, code, and web development — the goal is to have pages live while readers are actively searching for answers on a given topic.
+Rank Journey SEO is an SEO news and education website built with Astro and hosted on GitHub Pages at `https://www.rankjourneyseo.com` (custom domain). The site publishes long-form educational articles alongside timely news coverage of SEO, AI, code, and web development — the goal is to have pages live while readers are actively searching for answers on a given topic.
 
-Most long-form content is written by the owner personally. Internally, writing is also how the owner learns ("to teach is to learn twice") — that motive stays off the public site. The owner is also using this repository to learn GitHub; prefer clear, small steps and explain Git/GitHub when those come up.
+Long-form content is written by the owner. Internally, writing is also how the owner learns ("to teach is to learn twice") — that motive stays off the public site. The owner is also using this repository to learn GitHub; prefer clear, small steps and explain Git/GitHub when those come up.
 
 Start small. Ship a homepage, an articles index, individual article pages, and a thin About page. Grow navigation, tools, and sections as content grows.
 

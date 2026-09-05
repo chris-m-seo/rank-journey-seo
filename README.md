@@ -18,7 +18,7 @@ Then open [http://localhost:4321](http://localhost:4321).
 |---|---|
 | `website/` | The Astro site (pages, layout, styles, logo) |
 | `content/blog/` | Articles. One folder per post: `content/blog/your-slug/index.md` |
-| `AGENTS.md` | Project rules, design tokens, and how Grok should work in this repo |
+| `AGENTS.md` | Project rules, design tokens, and how we should work in this repo |
 
 ## GitHub, in this project
 
