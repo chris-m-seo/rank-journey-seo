@@ -107,6 +107,8 @@ socialImage: "./social.png"
 
 DNS at GoDaddy (when going live): point `www` at GitHub Pages. Apex (`rankjourneyseo.com`) should redirect to `www`.
 
+JSON-LD on the site: Organization (`Rank Journey SEO`), Person (`Chris M`) as author/founder in markup only, WebSite on the homepage, and BlogPosting on articles with `author` / `publisher` pointing at those `@id`s. About is the publication page, not a personal bio — do not link the byline to `/about/`. Do not invent extra Person `sameAs` profiles, awards, or ratings. The public X account belongs on the Organization, not on the Person, unless a personal profile exists.
+
 ## Content and voice guidelines
 
 - Voice must reflect the owner's authentic character, not a performed or generic "brand" persona — authenticity is treated as more trust-building than polish.

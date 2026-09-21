@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
 import { getPublishedPosts } from '../lib/posts';
+import { graph, organizationNode, personNode, websiteNode } from '../lib/schema';
 
 const posts = await getPublishedPosts();
 ---
@@ -9,6 +10,7 @@ const posts = await getPublishedPosts();
 <BaseLayout
 	title="Rank Journey SEO"
 	description="SEO news and education. Clear, practical articles on search so you can improve your site with confidence."
+	jsonLd={graph([organizationNode(), personNode(), websiteNode()])}
 >
 	<section class="page wrap">
 		<p class="kicker">SEO news & education</p>

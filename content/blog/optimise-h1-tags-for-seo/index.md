@@ -38,7 +38,7 @@ I recently worked for a company on their search engine optimisation. One of the 
 
 I asked the design team who had made the pages why they chose this "unique" heading structure. They looked at me blankly and asked, *"Isn't that what you're supposed to do?"*.
 
-It was at this moment I realised the scale of the task in front of me.
+This is how most website themes and well-meaning designers ship a page. Choosing headers by style and not structure.
 
 To understand why this isn't best practice when it comes to SEO, I want you to imagine a book. Picture the front cover with the title written proudly on the front. It clearly tells you the subject of the book. You feel confident this book is on the exact topic you want to read. You flick the pages through your fingers until you find the first chapter. But when you get there, you find another book cover, with a different title. This title is kind of similar to the first, but not exactly the same. You now question whether this book is what you're looking for after all, and wonder, *"Is the book about this or about that?"*.
 

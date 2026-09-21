@@ -1,10 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { graph, organizationNode } from '../lib/schema';
 ---
 
 <BaseLayout
 	title="About"
 	description="Rank Journey SEO publishes SEO news and education — practical articles on search, so you can improve your site with confidence."
+	jsonLd={graph([organizationNode()])}
 >
 	<section class="page">
 		<div class="measure">

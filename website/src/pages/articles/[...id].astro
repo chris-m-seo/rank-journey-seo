@@ -3,6 +3,12 @@ import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getPublishedPosts, formatDate, getHeroUrl } from '../../lib/posts';
 import type { BlogPost } from '../../lib/posts';
+import {
+	articleNode,
+	graph,
+	organizationNode,
+	personNode,
+} from '../../lib/schema';
 
 export async function getStaticPaths() {
 	const posts = await getPublishedPosts();
@@ -20,6 +26,10 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 const typeLabel = post.data.type === 'news' ? 'News' : 'Guide';
 const heroUrl = getHeroUrl(post);
+const articleUrl = new URL(`/articles/${post.id}/`, Astro.site).href;
+const articleImage = heroUrl
+	? new URL(heroUrl, Astro.site).href
+	: undefined;
 ---
 
 <BaseLayout
@@ -27,6 +37,18 @@ const heroUrl = getHeroUrl(post);
 	seoTitle={post.data.seoTitle}
 	description={post.data.description}
 	ogImage={heroUrl}
+	jsonLd={graph([
+		organizationNode(),
+		personNode(),
+		articleNode({
+			url: articleUrl,
+			headline: post.data.seoTitle ?? post.data.title,
+			description: post.data.description,
+			datePublished: post.data.pubDate,
+			dateModified: post.data.updatedDate,
+			image: articleImage,
+		}),
+	])}
 >
 	<article>
 		<header class="article-header">
