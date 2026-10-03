@@ -18,7 +18,7 @@ Then open [http://localhost:4321](http://localhost:4321).
 |---|---|
 | `website/` | The Astro site (pages, layout, styles, logo) |
 | `content/blog/` | Articles. One folder per post: `content/blog/your-slug/index.md` |
-| `AGENTS.md` | Project rules, design tokens, and how we should work in this repo |
+| `CLAUDE.md` | Project rules, design tokens, and how we should work in this repo |
 
 ## GitHub, in this project
 
@@ -37,6 +37,6 @@ A push to `main` builds `website/` and deploys to GitHub Pages. In the repo Sett
 
 1. Finish the piece.
 2. Create `content/blog/your-article-slug/index.md`.
-3. Add the frontmatter block documented in `AGENTS.md`.
+3. Add the frontmatter block documented in `CLAUDE.md`.
 4. Keep `draft: true` until you want it on the live site.
 5. Put images in that same folder.

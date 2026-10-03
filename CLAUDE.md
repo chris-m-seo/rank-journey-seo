@@ -1,4 +1,4 @@
-# AGENTS.md
+# CLAUDE.md
 
 Project rules for Rank Journey SEO.
 
@@ -115,7 +115,7 @@ JSON-LD on the site: Organization (`Rank Journey SEO`), Person (`Chris M`) as au
 - Public stance: an expert publication, in the same neighbourhood as Search Engine Land. Readers should land and feel they are in good hands. Never mention that the owner is learning, writing in order to learn, or that the site is a personal study project. That context is for this file and for the owner only.
 - Homepage positioning (public): SEO news and education. Practical articles on search so the reader can improve their site with confidence. Factual, not salesy.
 - Target audience / persona: not yet defined. When agreed, add it here.
-- Long-form articles in `content/blog/` are primarily owner-authored. Grok's role there, if asked, is reviewing/refining rather than originating voice.
-- For reactive news content (timely SEO/AI/code/dev news), Grok's expected role is: explain the news and its implications clearly, then produce a quick draft to give the owner a head start — not a finished, publish-ready piece.
+- Long-form articles in `content/blog/` are primarily owner-authored. Claude's role there, if asked, is reviewing/refining rather than originating voice.
+- For reactive news content (timely SEO/AI/code/dev news), Claude's expected role is: explain the news and its implications clearly, then produce a quick draft to give the owner a head start — not a finished, publish-ready piece.
 - When adapting a blog article into a `content/youtube-scripts/` entry, preserve the article's core points but rewrite for spoken delivery (shorter sentences, verbal signposting, no visual-only formatting like tables or bullet-heavy lists).
 - `content/social-captions/` content should be short-form and platform-appropriate (X vs. Instagram), derived from the linked long-form piece rather than written standalone.
