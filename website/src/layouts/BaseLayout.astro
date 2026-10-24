@@ -17,8 +17,7 @@ interface Props {
 }
 
 const { title, description, seoTitle, ogImage, ogType = 'website', jsonLd } = Astro.props;
-const heading = seoTitle ?? title;
-const pageTitle = heading === 'Rank Journey SEO' ? heading : `${heading} | Rank Journey SEO`;
+const pageTitle = seoTitle ?? title;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const shareImage = new URL(ogImage ?? '/logo.jpg', Astro.site);
 ---
