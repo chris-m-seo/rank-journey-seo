@@ -1,0 +1,91 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {
+	getPublishedNews,
+	formatDate,
+	formatWeekRange,
+	getNewsHeroUrl,
+	newsHref,
+	NEWS_HERO_ALT,
+	NEWS_PATH,
+	NEWS_TITLE,
+} from '../../lib/posts';
+import type { NewsPost } from '../../lib/posts';
+import { articleNode, graph, organizationNode, personNode } from '../../lib/schema';
+
+export async function getStaticPaths() {
+	const posts = await getPublishedNews();
+	return posts.map((post) => ({
+		params: { id: post.id },
+		props: { post },
+	}));
+}
+
+interface Props {
+	post: NewsPost;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const heroUrl = getNewsHeroUrl(post);
+const pageUrl = new URL(newsHref(post), Astro.site).href;
+const weekRange = formatWeekRange(post.data.weekStart, post.data.weekEnd);
+---
+
+<BaseLayout
+	title={post.data.title}
+	seoTitle={post.data.seoTitle}
+	description={post.data.description}
+	ogImage={heroUrl}
+	ogType="article"
+	jsonLd={graph([
+		organizationNode(),
+		personNode(),
+		articleNode({
+			url: pageUrl,
+			headline: post.data.seoTitle ?? post.data.title,
+			description: post.data.description,
+			datePublished: post.data.pubDate,
+			dateModified: post.data.updatedDate,
+			image: new URL(heroUrl, Astro.site).href,
+		}),
+	])}
+>
+	<article>
+		<header class="article-header">
+			<div class="measure">
+				<nav class="breadcrumb" aria-label="Breadcrumb">
+					<ol>
+						<li><a href="/">Home</a></li>
+						<li><a href={`${NEWS_PATH}/`}>{NEWS_TITLE}</a></li>
+						<li aria-current="page">{post.data.title}</li>
+					</ol>
+				</nav>
+				<p class="kicker">SEO News</p>
+				<h1 class="page-title">{post.data.title}</h1>
+				<p class="article-meta">
+					{post.data.author && <>{post.data.author} · </>}
+					{weekRange} · Published
+					<time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+					{post.data.updatedDate &&
+						post.data.updatedDate.valueOf() !== post.data.pubDate.valueOf() && (
+							<> · Updated {formatDate(post.data.updatedDate)}</>
+						)}
+				</p>
+				<figure class="hero">
+					<img
+						src={heroUrl}
+						alt={post.data.heroImageAlt ?? NEWS_HERO_ALT}
+						width="2000"
+						height="1000"
+					/>
+				</figure>
+			</div>
+		</header>
+
+		<div class="measure prose">
+			<Content />
+		</div>
+	</article>
+</BaseLayout>

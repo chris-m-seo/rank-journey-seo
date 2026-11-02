@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPublishedNews, newsYear, NEWS_TITLE } from '../../lib/posts';
+
+const posts = await getPublishedNews();
+const years = [...new Set(posts.map(newsYear))].sort((a, b) => b - a);
+---
+
+<BaseLayout
+	title={NEWS_TITLE}
+	description="Weekly SEO news and updates. A look back at the week's leading SEO and AI news headlines, with insights and actionable tips for the week ahead."
+>
+	<section class="page wrap">
+		<p class="kicker">SEO News</p>
+		<h1 class="page-title">{NEWS_TITLE}</h1>
+		<p class="lede">A weekly round-up of the top SEO news and search updates.</p>
+
+		{posts.length === 0 ? (
+			<p class="empty-state">Weekly news will appear here.</p>
+		) : years.length > 1 ? (
+			years.map((year) => (
+				<>
+					<h2 class="year-heading">{year}</h2>
+					<ul class="post-list">
+						{posts.filter((p) => newsYear(p) === year).map((post) => (
+							<li><PostCard post={post} /></li>
+						))}
+					</ul>
+				</>
+			))
+		) : (
+			<ul class="post-list">
+				{posts.map((post) => (
+					<li><PostCard post={post} /></li>
+				))}
+			</ul>
+		)}
+	</section>
+</BaseLayout>

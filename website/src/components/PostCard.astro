@@ -1,21 +1,47 @@
 ---
-import { formatDate, getThumbnailUrl, postHref, type BlogPost } from '../lib/posts';
+import {
+	formatDate,
+	formatWeekRange,
+	getNewsThumbnailUrl,
+	getThumbnailUrl,
+	newsHref,
+	postHref,
+	NEWS_THUMBNAIL_ALT,
+	type BlogPost,
+	type NewsPost,
+} from '../lib/posts';
 
 interface Props {
-	post: BlogPost;
+	post: BlogPost | NewsPost;
 }
 
 const { post } = Astro.props;
-const thumbUrl = getThumbnailUrl(post);
+const isNews = post.collection === 'news';
+const href = isNews ? newsHref(post) : postHref(post);
+const thumbUrl = isNews ? getNewsThumbnailUrl(post) : getThumbnailUrl(post);
+const thumbAlt = isNews
+	? (post.data.thumbnailAlt ?? NEWS_THUMBNAIL_ALT)
+	: (post.data.thumbnailAlt ?? '');
 ---
 
-<a class:list={['post-card', thumbUrl && 'post-card--has-thumb']} href={postHref(post)}>
+<a class:list={['post-card', thumbUrl && 'post-card--has-thumb']} href={href}>
 	<div class="post-card__body">
 		<p class="post-card__meta">
-			<time datetime={post.data.pubDate.toISOString()}>
-				{formatDate(post.data.pubDate)}
-			</time>
-			{post.data.type === 'news' ? ' · News' : ' · Guide'}
+			{isNews ? (
+				<>
+					<time datetime={post.data.weekStart.toISOString()}>
+						{formatWeekRange(post.data.weekStart, post.data.weekEnd)}
+					</time>
+					{' · News'}
+				</>
+			) : (
+				<>
+					<time datetime={post.data.pubDate.toISOString()}>
+						{formatDate(post.data.pubDate)}
+					</time>
+					{post.data.type === 'news' ? ' · News' : ' · Guide'}
+				</>
+			)}
 		</p>
 		<h2 class="post-card__title">{post.data.title}</h2>
 		<p class="post-card__excerpt">{post.data.description}</p>
@@ -24,7 +50,7 @@ const thumbUrl = getThumbnailUrl(post);
 		<div class="post-card__thumb">
 			<img
 				src={thumbUrl}
-				alt={post.data.thumbnailAlt ?? ''}
+				alt={thumbAlt}
 				width="150"
 				height="100"
 			/>

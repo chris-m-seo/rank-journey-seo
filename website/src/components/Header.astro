@@ -2,6 +2,7 @@
 const path = Astro.url.pathname;
 const isHome = path === '/';
 const isArticles = path === '/articles' || path.startsWith('/articles/');
+const isNews = path === '/seo-news-and-updates' || path.startsWith('/seo-news-and-updates/');
 const isAbout = path === '/about' || path.startsWith('/about/');
 ---
 
@@ -20,6 +21,7 @@ const isAbout = path === '/about' || path.startsWith('/about/');
 		<nav class="nav" aria-label="Primary">
 			<a href="/" aria-current={isHome ? 'page' : undefined}>Home</a>
 			<a href="/articles/" aria-current={isArticles ? 'page' : undefined}>Articles</a>
+			<a href="/seo-news-and-updates/" aria-current={isNews ? 'page' : undefined}>SEO News</a>
 			<a href="/about/" aria-current={isAbout ? 'page' : undefined}>About</a>
 		</nav>
 	</div>
