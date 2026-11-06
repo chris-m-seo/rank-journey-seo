@@ -137,3 +137,14 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Private working files: local only, never pushed to GitHub or served by the site
+private/
+
+# Not needed to build or serve the site: kept locally, not published on GitHub
+/CLAUDE.md
+/README.md
+/scripts/
+/rank-journey-seo-logo-image.jpg
+/website/README.md
+/website/.vscode/

@@ -27,24 +27,28 @@ There is no test suite yet.
 
 - `website/` — the Astro site source. Site-level assets (logo, favicon, icons) live here, not under `content/`.
 - `content/blog/` — long-form articles. Each post is a folder: `content/blog/<slug>/index.md` with images beside it (hero, thumbnail, social graphic). Not a shared media folder. The file must be named exactly `index.md`: the site takes the URL from the folder name, so any other file name adds a second path segment to the URL.
+- `content/seo-news/` — weekly news pages: `content/seo-news/week-44-2026/index.md` (must be `index.md`). `_weekly-template.md` is the copy-paste starting point (underscore files are ignored by the build). Frontmatter: `title` ("SEO News: Week 44 2026"), `seoTitle` ("SEO News: Week 44 2026 – Lead Headline", ≤60 chars), `description` (include the dates), `pubDate`, `updatedDate`, `weekStart` (Monday), `weekEnd` (Sunday), `author`, `tags`, `draft`. Image fields are omitted: every week uses the shared SVGs in `website/public/media/seo-news-and-updates/` (authoring copies in `content/seo-news/`). ISO weeks; 2026 has 53.
 - `content/youtube-scripts/` — voice-overlay scripts reworked from long-form blog articles, written to be read aloud on camera.
 - `content/social-captions/` — short-form companion content for X and Instagram.
+- `private/` — git-ignored, local only; never committed, pushed or served. Holds working documents that must not be public. Before drafting services, article or About copy, read `private/target-audience.md`. Never copy its contents into any tracked file, including this one.
 - `brand/` — voice guidelines and visual identity documents. Consult this before drafting any content to match site voice.
 - `tools/` — standalone interactive SEO tools for readers, each in its own subfolder. Two exist conceptually so far: a ranking movement simulator and a meta title checker with live preview (a SERP simulator is planned). New tools should follow the same one-tool-per-folder pattern. Keep build scripts out of here; `tools/` is for reader-facing pages only.
 - `scripts/` — build-time helpers that never ship to the site. Currently `scripts/infographics/` (see Infographics below).
 
 ## Site information architecture
 
-Current nav: **Home**, **Articles**, **About**.
+Current nav: **Home**, **Articles**, **SEO News**, **About**.
 
 | Route | Purpose |
 |---|---|
 | `/` | Homepage. Positioning line + latest published articles. Not a marketing landing page. |
 | `/articles/` | Article index (the "SEO Articles" category page). |
 | `/articles/<slug>/` | Individual article. |
+| `/seo-news-and-updates/` | "SEO News and Updates" hub: a listing of weekly news pages, newest first (grouped by year once there is more than one). Does not repeat the latest week's text. |
+| `/seo-news-and-updates/week-44-2026/` | One weekly SEO news page. Folder name is the slug; keep the year in it. Pages stay on the site. |
 | `/about/` | Thin about page. Expand when the owner writes it. |
 
-Do not add Tools, News, YouTube, or social sections to the nav until those exist.
+Do not add Tools, YouTube, or social sections to the nav until those exist.
 
 ## Design tokens
 
@@ -155,8 +159,13 @@ Made with `scripts/infographics/` (full guide in its `README.md`), not Canva. No
 
 ## Open items
 
-- Target audience is not defined yet (see Content and voice guidelines).
-- The About page is still a placeholder.
+- Decide whether the homepage should mix in the latest news week (currently guides only). The SEO News hub wording (label "SEO News", lede and meta description) was settled on 2 Nov 2026.
+- Target audience is defined (2 Nov 2026) in the private, git-ignored `private/target-audience.md`. It governs body copy on Services, Articles and About; the homepage and SEO News keep an SEO-literate voice.
+- The About page is still a placeholder. The owner will write it after the Services pages, since those will shape it. Services pages are postponed until around January 2027 (the owner needs ICO registration, insurance and a business address first). In the meantime: weekly news, articles, the SERP simulator and site improvements; the About page can wait for the Services pages.
+  The About page: The owner has the idea for it (foundational hard SEO skills first, modern tools on top; keep it positive and not preachy).
+- Homepage meta title and description were rewritten on 2 Nov 2026. The Articles page title, label, lede and meta description were also settled on 2 Nov 2026. Home, Articles and SEO News label/lede/meta wording is final unless the owner finds better wording; do not prompt for rewrites.
+- The SERP simulator (first reader-facing tool in `tools/`) is wanted sooner rather than later: a one-off build with little upkeep.
+- The H1 article's `seoTitle` is 62 characters, just over the 45–60 guideline.
 - PNG `socialImage` for link previews, when social publishing starts.
 - A transparent PNG of the logo mark, to replace the black-square JPG.
 - Voice notes in `brand/` do not exist yet. Build them gradually from published articles and treat them as provisional.
@@ -176,8 +185,8 @@ JSON-LD on the site: Organization (`Rank Journey SEO`), Person (`Chris M`) as au
 
 - Voice must reflect the owner's authentic character, not a performed or generic "brand" persona — authenticity is treated as more trust-building than polish.
 - Public stance: an expert publication, in the same neighbourhood as Search Engine Land. Readers should land and feel they are in good hands. Never mention that the owner is learning, writing in order to learn, or that the site is a personal study project. That context is for this file and for the owner only.
-- Homepage positioning (public): SEO news and education. Practical articles on search so the reader can improve their site with confidence. Factual, not salesy.
-- Target audience / persona: not yet defined. When agreed, add it here.
+- Homepage positioning (public, interim until the Services pages exist, about January 2027): SEO news and education. Page title "Rank Journey SEO | SEO News and Guides"; orange label "SEO News and Education"; lede "SEO news and information to help you boost organic performance and drive quality traffic to your website."; meta description "SEO news and in-depth guides to help you improve organic performance and get your site in front of the right searchers." Factual, not salesy. When the Services pages go live, restore the services wording: title "Rank Journey SEO | SEO News, Guides and Services", label "SEO Services, News and Education", lede "SEO News, information and services to help you boost organic performance and drive quality traffic to your website.", meta "SEO news, in-depth guides and services to help you improve organic performance and get your site in front of the right searchers." Do not put services wording live without services pages behind it.
+- Target audience / persona: defined, but kept private in `private/target-audience.md` (git-ignored). Do not restate it here.
 - Long-form articles in `content/blog/` are primarily owner-authored. Claude's role there, if asked, is reviewing/refining rather than originating voice.
 - For reactive news content (timely SEO/AI/code/dev news), Claude's expected role is: explain the news and its implications clearly, then produce a quick draft to give the owner a head start — not a finished, publish-ready piece.
 - When adapting a blog article into a `content/youtube-scripts/` entry, preserve the article's core points but rewrite for spoken delivery (shorter sentences, verbal signposting, no visual-only formatting like tables or bullet-heavy lists).

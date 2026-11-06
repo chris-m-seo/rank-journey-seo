@@ -8,16 +8,16 @@ const posts = await getPublishedPosts();
 ---
 
 <BaseLayout
-	title="Rank Journey SEO"
-	description="SEO news and education. Clear, practical articles on search so you can improve your site with confidence."
+	title="Rank Journey SEO | SEO News and Guides"
+	description="SEO news and in-depth guides to help you improve organic performance and get your site in front of the right searchers."
 	jsonLd={graph([organizationNode(), personNode(), websiteNode()])}
 >
 	<section class="page wrap">
-		<p class="kicker">SEO news & education</p>
+		<p class="kicker">SEO News and Education</p>
 		<h1 class="page-title">Rank Journey SEO</h1>
 		<p class="lede">
-			News and education on SEO, search, and the web. Practical articles so you
-			can improve your site with confidence.
+			SEO news and information to help you boost organic performance
+			and drive quality traffic to your website.
 		</p>
 
 		{posts.length === 0 ? (

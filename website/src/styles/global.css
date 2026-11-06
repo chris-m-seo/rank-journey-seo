@@ -174,8 +174,7 @@ a:hover {
 	color: var(--color-accent);
 	font-size: 0.82rem;
 	font-weight: 600;
-	letter-spacing: 0.08em;
-	text-transform: uppercase;
+	letter-spacing: 0.02em;
 }
 
 .page-title {
@@ -525,4 +524,10 @@ a:hover {
 	.post-card__excerpt {
 		max-width: 40rem;
 	}
+}
+
+.year-heading {
+	margin: 2.5rem 0 0.5rem;
+	font-size: 1.25rem;
+	color: var(--muted, #5a5a5a);
 }
